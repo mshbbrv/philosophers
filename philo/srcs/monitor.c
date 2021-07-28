@@ -79,7 +79,7 @@ void	check_philos(t_philo *philo)
 		}
 		pthread_mutex_unlock(philo->data->life_mutex);
 		philo = philo->next;
-		usleep(300);
+		usleep(1000);
 	}
 }
 

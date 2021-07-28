@@ -74,6 +74,7 @@ void	init_data(t_data *data)
 	data->time_to_sleep = 0;
 	data->max_meals = -1;
 	data->life_monitor = NULL;
+	data->print_status = NULL;
 	data->forks = NULL;
 	data->full_count = 0;
 	data->status = RUN;

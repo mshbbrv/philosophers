@@ -17,6 +17,7 @@ void	print_status(t_philo *philo, char *str)
 	struct timeval	ts;
 	long			time_stamp;
 
+	sem_wait(philo->data->print_status);
 	ts = timestamp(philo->data->all_started);
 	time_stamp = (ts.tv_sec * 1000000 + ts.tv_usec) / 1000;
 	if (philo->status == RUN)
@@ -34,6 +35,7 @@ void	print_status(t_philo *philo, char *str)
 		else if (str[0] == 'd')
 			printf("%s%s%s\n", RED, str, DEF);
 	}
+	sem_post(philo->data->print_status);
 }
 
 struct timeval	timestamp(struct timeval start)
@@ -61,6 +63,8 @@ void	free_data(t_data *data)
 			free(data->forks);
 		if (data->life_monitor)
 			free(data->life_monitor);
+		if (data->print_status)
+			free(data->print_status);
 		while (data->philo_head)
 		{
 			philo_tmp = data->philo_head->next;

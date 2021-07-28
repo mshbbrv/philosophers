@@ -27,5 +27,6 @@ int	main(int argc, char *argv[])
 		return (1);
 	if (close_sem(data))
 		return (1);
+	free_data(data);
 	return (0);
 }

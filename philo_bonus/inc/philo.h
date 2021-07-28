@@ -56,6 +56,7 @@ struct s_data
 	struct timeval	all_started;
 	sem_t			*forks;
 	sem_t			*life_monitor;
+	sem_t			*print_status;
 	pthread_t		philos_th;
 	pthread_t		life_monitor_th;
 	t_philo			*philo_head;
@@ -94,4 +95,5 @@ void				kill_philos(t_philo *philo);
 long				lifetime(t_philo *philo);
 int					meals_monitor(t_data *data);
 void				*life_monitor_thread(void *arg);
+void				free_data(t_data *data);
 #endif

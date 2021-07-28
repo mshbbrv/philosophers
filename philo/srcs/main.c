@@ -31,5 +31,6 @@ int	main(int argc, char *argv[])
 		return (1);
 	if (destroy_mutex(data))
 		return (1);
+	free_data(data);
 	return (0);
 }

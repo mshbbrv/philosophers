@@ -14,20 +14,10 @@
 
 void	eating(t_philo *philo)
 {
-	if ((philo->id % 2) == 0)
-	{
-		pthread_mutex_lock(philo->left_fork);
-		print_status(philo, FORK);
-		pthread_mutex_lock(philo->right_fork);
-		print_status(philo, FORK);
-	}
-	else
-	{
-		pthread_mutex_lock(philo->right_fork);
-		print_status(philo, FORK);
-		pthread_mutex_lock(philo->left_fork);
-		print_status(philo, FORK);
-	}
+	pthread_mutex_lock(philo->left_fork);
+	print_status(philo, FORK);
+	pthread_mutex_lock(philo->right_fork);
+	print_status(philo, FORK);
 	print_status(philo, EAT);
 	philo->last_meal_time = timestamp(philo->data->start_tv);
 	mysleep(philo->data->time_to_eat * 1000);
@@ -68,8 +58,18 @@ int	start_simulation(t_data *data)
 	philo = data->philo_head;
 	while (philo)
 	{
-		if (pthread_create(&philo->pthread, NULL, &simulation, philo))
-			return (error_handler("Failed to create thread", data));
+		if (philo->id % 2 != 0)
+			if (pthread_create(&philo->pthread, NULL, &simulation, philo))
+				return (error_handler("Failed to create thread", data));
+		philo = philo->next;
+	}
+	usleep(30000);
+	philo = data->philo_head;
+	while (philo)
+	{
+		if (philo->id % 2 == 0)
+			if (pthread_create(&philo->pthread, NULL, &simulation, philo))
+				return (error_handler("Failed to create thread", data));
 		philo = philo->next;
 	}
 	return (0);

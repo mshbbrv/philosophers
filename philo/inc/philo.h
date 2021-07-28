@@ -87,4 +87,5 @@ int					join_threads(t_data *data);
 int					life_monitor_start(t_data *data);
 void				mysleep(long time);
 int					malloc_mutex(pthread_mutex_t **mutex, t_data *data);
+void				free_data(t_data *data);
 #endif

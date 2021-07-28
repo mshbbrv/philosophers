@@ -61,14 +61,11 @@ void	free_data(t_data *data)
 	{
 		if (data->print_status)
 			free(data->print_status);
+		if (data->life_mutex)
+			free(data->life_mutex);
 		while (data->philo_head)
 		{
 			philo_tmp = data->philo_head->next;
-			if (data->philo_head->right_fork)
-			{
-				free(data->philo_head->right_fork);
-				data->philo_head->right_fork = NULL;
-			}
 			if (data->philo_head->left_fork)
 			{
 				free(data->philo_head->left_fork);

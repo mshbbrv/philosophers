@@ -76,6 +76,7 @@ void	init_data(t_data *data)
 	data->max_meals = -1;
 	data->status = RUN;
 	data->life_monitor = NULL;
+	data->life_mutex = NULL;
 }
 
 int	init_options(t_data *data, int argc, char *argv[])
